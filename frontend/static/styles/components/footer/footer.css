@@ -1,0 +1,47 @@
+.footer-bar {
+    padding: 10px 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-bar > .create-playlist-button {
+    border: none;
+    cursor: pointer;
+    border-radius: 24px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    background: linear-gradient(90deg, #8529ce -4%, #54248c 32%, #54287d 68.41%, #462966 114.08%);  
+    
+}
+
+.footer-bar > .create-playlist-button:hover {
+    box-shadow: 8px 8px 10px #462966;
+    transition: 0.3s ease;
+
+}
+
+
+.footer-menu {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
+}
+
+.footer-item {
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.footer-item:hover {
+    color: #1DB954;
+    transition: 0.3s ease; 
+}
