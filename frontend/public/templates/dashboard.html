@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard | MovieFy</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/53a9f4e8dd.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="../../static/styles/dashboard.css">
+
+
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/site.webmanifest">
+    </head>
+
+
+    <header>
+        <div class="header-container">
+            <nav class="navbar">
+                <a href="/" id="moviefy-logo" class="nav-logo"> MOVIEFY</a>
+
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">About</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+
+                    <li>
+
+                        <div class="section-song-search">
+                            <div class="search-bar">
+                                <form id="search-form" action="">
+            
+                                    <input type="search" id="search-input" placeholder="Search a movie or show...">
+                                    <i id="search-icon" class="fa-solid fa-magnifying-glass"></i>
+            
+                                </form>
+                            </div>                              
+            
+                        </div>
+                        
+                    </li>
+
+                    
+
+                    <li id="spotify-logo" class="nav-item-spotify">
+                        <a href="https://www.spotify.com/us/signup?flow_id=581657a2-a828-440f-82d5-f62ec3e0c498%3A1715945370&forward_url=https%3A%2F%2Faccounts.spotify.com%2Fen%2Fstatus%3Fflow_ctx%3D581657a2-a828-440f-82d5-f62ec3e0c498%3A1715945370" target="_blank">
+                            <i class="fa-brands fa-spotify"></i>
+                        </a>
+                    </li>
+
+                    
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <body>
+
+        <div class="container">
+
+
+
+
+
+            <div class="section-song-functionality">
+                <div class="loader-effect" id="loader-effect"></div>
+                
+                <div class="section-search-results">
+                    
+                    
+                    <div id="track-list"></div>
+                </div>
+                <div class="section-your-playlist"> 
+
+                    <div class="section-playlist-info" id="playlist-info">
+
+                
+
+                        
+                        
+
+                        <div class="section-movie-poster-container">
+                            
+                            
+                            <div id="movie-image-container">
+
+                                <img src="../../static/images/note-beam.png">
+
+
+                            </div>
+                        </div> 
+
+                        
+
+                        <div class="playlist-info-container">
+
+                            <div class="spotify-user" id="spotify-user">
+                                <img src="{{ profile_image }}" alt="Profile Picture" class="profile-picture">
+                                <div class="profile-info">
+                                    <div class="name">{{ display_name }}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="playlist-name-input">
+                                
+                                <input id="playlist-name" type="text" required="" autocomplete="off">
+                                <label for="name">Playlist Name</label>
+                   
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div id="your-track-list">
+
+                    </div>
+
+                                  
+                </div>
+            </div>
+     
+            <div class="section-footer-functionality">
+
+                <nav class="footer-bar">
+
+                    <button class="create-playlist-button">
+                        Add to My Spotify Library
+                    </button>
+
+                    <div class="search">
+                        <input type="text" class="search__input" placeholder="Search a song or artist...">
+                        <button class="search__button">
+                            <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+                                <g>
+                                    <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <ul class="footer-menu">
+
+                        <li class="footer-item">
+                            <i id="refresh-button" class="fa-solid fa-arrow-rotate-right"></i>
+                        </li>
+                        
+                    
+                    </ul>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+
+        <script src="../../static/scripts/dashboard.js"></script>
+    </body>
+</html>
