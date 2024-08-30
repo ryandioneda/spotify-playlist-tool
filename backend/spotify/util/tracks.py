@@ -68,6 +68,6 @@ def fetch_similar_tracks(seed_tracks):
         'limit': 50  # You can adjust the limit as needed
     }
     response = requests.get(url, headers=headers, params=params)
-    print("Response:", response)
+    
     response.raise_for_status()  # Raise an error for bad HTTP status codes
     return response.json()
