@@ -1,0 +1,43 @@
+.section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 1em 0 1em 0;
+    max-width: 190px;
+    position: relative;
+  }
+  
+  .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input input {
+    color: white;
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(141, 109, 255);
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+  
+  }
+  
+  .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input label {
+    font-size: 100%;
+    position: absolute;
+    top: 50%; /* Start label in the middle of the input */
+    left: 0.8em; /* Slightly right to center inside input */
+    transform: translateY(-50%); /* Center vertically */
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(255, 255, 255);
+  
+  }
+  
+  .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input input:focus ~ label,
+  .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input input:valid ~ label {
+    top: 0.8em; /* Move label */
+    transform: translateY(-100%) scale(0.9); /* Move label out of the way and scale down */
+    margin-left: 1.5em; /* Adjust left position for smaller label */
+    background-color: #212121;
+    padding: 0 0.4em; /* Adjust padding */
+  }
+  
+  .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-inputGroup :is(input:focus, input:valid) {
+    border-color: rgb(37, 37, 211);
+  }
