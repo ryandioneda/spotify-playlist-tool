@@ -53,3 +53,30 @@
     transition: 0.3s ease;
 
 }
+
+
+@media (max-width: 768px) {
+    .welcome-container {
+        top: calc(50% + 20px); /* Adjust top position for smaller screens */
+    }
+
+    .welcome-text {
+        font-size: 30px; /* Adjust font size for smaller screens */
+        margin-bottom: 20px; /* Adjust margin for smaller screens */
+    }
+
+    .more-welcome-text {
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+
+    .login-button {
+        margin-top: 10px; /* Adjust margin for smaller screens */
+    }
+
+    .spotify-button {
+        font-size: 12px; /* Adjust font size for smaller screens */
+        padding: 10px 12px; /* Adjust padding for smaller screens */
+        margin-top: 30px; /* Adjust margin for smaller screens */
+        margin-bottom: 30px; /* Adjust margin for smaller screens */
+    }
+}
