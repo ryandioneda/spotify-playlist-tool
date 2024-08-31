@@ -29,9 +29,16 @@
 }
 
 .footer-bar > .tools > .create-playlist-button.active {
+  color: white;
   background: #1DB954;
   background-color: #1DB954;
   box-shadow: none;
+}
+
+.footer-bar > .tools > .create-playlist-button.error {
+  color: white;
+  background: #ff3333;
+  background-color: #ff3333;
 }
 
 .footer-bar > .tools > .create-playlist-button:hover {

@@ -369,8 +369,11 @@ function retrievePlaylistName() {
 }
 
 
+
 //! FUNCTION TO ADD PLAYLIST TO LIBRARY
 function createPlaylist() {
+    const createButton = document.querySelector('.create-playlist-button');
+
     
     const trackIDs = retrieveTrackList();
     
@@ -390,13 +393,14 @@ function createPlaylist() {
     .then(response => {
         
         if (!response.ok) {
-            return response.json().then(error => { throw new Error(error.error); });
+            errorCreatingPlaylist(createButton)
+
         }
         return response.json();
     })
     .then(data => {
         
-        const createButton = document.querySelector('.create-playlist-button');
+        ;
         if (createButton) {
             createButton.textContent = 'Playlist Added!';
             createButton.disabled = true; // Optionally disable the button after success
@@ -413,10 +417,23 @@ function createPlaylist() {
         
     })
     .catch(error => {
-        console.error('Error adding playlist items:', error);
+        errorCreatingPlaylist(createButton)
         
     });
 }
+
+function errorCreatingPlaylist(createButton) {
+    createButton.textContent = 'Cannot Add Playlist';
+    createButton.classList.add('error');
+    createButton.disabled = true;
+
+    setTimeout(function() {
+        createButton.classList.remove('error');
+        createButton.textContent = 'Add to My Spotify Library';
+        createButton.disabled = false;
+    }, 5000); // 5000 milliseconds = 5 seconds
+}
+
 
 //! FUNCTION TO DISPLAY LOADER EFFECT
 function toggleLoaderAndPauseButton(trackItem, action) {
