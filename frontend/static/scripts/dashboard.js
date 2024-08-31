@@ -15,12 +15,15 @@ document.querySelectorAll(".nav-item").forEach(n => n.addEventListener("click", 
 }));
 
 
-function updateForMobileView(trackItem) {
-    if (window.matchMedia('(max-width: 768px)').matches) {
-        trackItem.classList.add('mobile-view');
-    } else {
-        trackItem.classList.add('mobile-view');
-    }
+function updateForMobileView() {
+    const trackItems = document.querySelectorAll('.track-item');
+    trackItems.forEach(trackItem => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            trackItem.classList.add('mobile-view');
+        } else {
+            trackItem.classList.remove('mobile-view');
+        }
+    });
 }
 
 
@@ -66,8 +69,7 @@ function createTrackItem(track, index, isInPlaylist = false) {
     </div>
 `;
 
-    updateForMobileView(trackItem);
-    window.addEventListener('resize', updateForMobileView);
+    window.addEventListener('resize', () => updateForMobileView(trackItem));
 
 
     // Add event listeners for play and pause buttons
@@ -580,7 +582,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+function errorSearching() {
+    searchInput.textContent = 'Error finding this movie. Please try again'
 
+    
+}
 
 
 
@@ -597,11 +603,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const loaderEffect = document.getElementById('loader-effect');
     
 
-    // Create and append the track count element
-    const playlistSection = document.querySelector('.section-your-playlist');
+    
     const trackCountElement = document.createElement('div');
     trackCountElement.id = 'track-count';
-    playlistSection.appendChild(trackCountElement);
+    
 
     // Handle search form submission
     async function handleSearch(event) {
@@ -615,8 +620,7 @@ document.addEventListener('DOMContentLoaded', function() {
         trackList.innerHTML = '';
 
         try {
-            // searchForm.classList.add('active'); //! SEARCH FORM STUFF
-            // searchInput.style.display = 'block';
+            
             searchInput.value = searchRequest;
             
 
@@ -632,7 +636,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Handle movie details
             if (movieDetails.error) {
-                console.error('Error:', movieDetails.error);
+                errorSearching();
                 alert(`Error: ${movieDetails.error}`); 
                 return;
             }
@@ -640,7 +644,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Handle related playlists
             if (playlistData.error) {
-                console.error('Error:', playlistData.error);
                 alert(`Error: ${playlistData.error}`);
                 return;
             }
