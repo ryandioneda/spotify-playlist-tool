@@ -15,6 +15,15 @@ document.querySelectorAll(".nav-item").forEach(n => n.addEventListener("click", 
 }));
 
 
+function updateForMobileView(trackItem) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        trackItem.classList.add('mobile-view');
+    } else {
+        trackItem.classList.add('mobile-view');
+    }
+}
+
+
 
 //function to create track item
 function createTrackItem(track, index, isInPlaylist = false) {
@@ -24,6 +33,7 @@ function createTrackItem(track, index, isInPlaylist = false) {
 
     const albumImageUrl = track.album.images.length > 0 ? track.album.images[0].url : 'default-image.jpg';
     const previewUrl = track.preview_url ? track.preview_url : '';
+    const albumName = track.album.name;
 
     trackItem.innerHTML = `
     <div class="track-number-container">
@@ -48,12 +58,16 @@ function createTrackItem(track, index, isInPlaylist = false) {
     <div class="track-info">
         <h1>${track.name}</h1>
         <p>${track.artists.map(artist => artist.name).join(', ')}</p>
+        <p class="album-name">${albumName}</p>
         ${previewUrl ? `<audio src="${previewUrl}" style="display: none;"></audio>` : '<p>No preview available</p>'}
     </div>
     <div class="${isInPlaylist ? 'minus-button' : 'plus-button'}">
         <i class="fa ${isInPlaylist ? 'fa-minus' : 'fa-plus'}"></i>
     </div>
 `;
+
+    updateForMobileView(trackItem);
+    window.addEventListener('resize', updateForMobileView);
 
 
     // Add event listeners for play and pause buttons

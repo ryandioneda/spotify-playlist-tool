@@ -196,3 +196,20 @@
         height: 0.2em;
     }
 }
+
+
+@media (max-width: 768px) {
+    .track-item.mobile-view .track-number {
+        display: none;
+
+    }
+
+    .track-item.mobile-view .play-button {
+        opacity: 1;
+        display: block;
+    }
+
+    .track-item.mobile-view .pause-button {
+        display: none;
+    }
+}
