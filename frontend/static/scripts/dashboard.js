@@ -386,8 +386,12 @@ function createPlaylist() {
         if (createButton) {
             createButton.textContent = 'Playlist Added!';
             createButton.disabled = true; // Optionally disable the button after success
+            createButton.classList.add('active');
+            console.log(createButton.classList)
+
 
             setTimeout(function() {
+                createButton.classList.remove('active');
                 createButton.textContent = 'Add to My Spotify Library';
                 createButton.disabled = false;
             }, 5000); // 5000 milliseconds = 5 seconds
