@@ -6,7 +6,14 @@
     gap: 20px;
 }
 
-.footer-bar > .create-playlist-button {
+.footer-bar > .tools {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.footer-bar > .tools > .create-playlist-button {
     border: none;
     cursor: pointer;
     border-radius: 24px;
@@ -46,37 +53,115 @@
     transition: 0.3s ease; 
 }
 
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .search__input {
+    border: none;
+    cursor: pointer;
+    border-radius: 24px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    background: linear-gradient(90deg, #8529ce -4%, #54248c 32%, #54287d 68.41%, #462966 114.08%); 
+    margin-right: -2rem;
+  }
+  
+  .search__input:hover, .search__input:focus {
+    box-shadow: 8px 8px 10px #462966;
+    transition: 0.3s ease;
+  }
+  
+  .search__input:focus {
+    outline: none;
+    background-color: #f0eeee;
+  }
+  
+  .search__input::-webkit-input-placeholder {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: black;
+  }
+  
+  .search__input:focus + .search__button {
+    background-color: transparent;
+  }
+  
+  .search__button {
+    border: none;
+    background-color: transparent;
+    margin-top: .1em;
+  }
+  
+  .search__button:hover {
+    cursor: pointer;
+  }
+  
+  .search__icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: #b4b4b4;
+  }
 
 
-@media (max-width: 768px) {
+
+
+
+
+
+
+
+  @media (max-width: 768px) {
 
     .footer-bar {
-        padding: 8px 16px; /* Slightly reduce padding */
+        
         flex-direction: row;
-        gap: 10px;
+        gap: 30px;
         align-items: flex-start;
+        position: relative; /* Make footer-bar the positioning context */
     }
 
-    .footer-bar > .create-playlist-button {
+    .footer-bar > .tools {
+        flex-direction: column;
+        
+        gap: 5px;
+    }
+
+    .footer-bar > .tools > .create-playlist-button {
         border: none;
         cursor: pointer;
-        border-radius: 16px; /* Smaller border radius */
-        padding: 8px 10px; /* Further reduce padding */
-        font-size: 10px; /* Smaller font size */
+        
+        padding-left: 8px;
         font-weight: 700;
+
+        
+
         background: linear-gradient(90deg, #8529ce -4%, #54248c 32%, #54287d 68.41%, #462966 114.08%);
     }
 
-    .footer-bar > .create-playlist-button:hover {
+    .footer-bar > .tools > .create-playlist-button:hover {
         box-shadow: 3px 3px 5px #462966; /* Lighter shadow for smaller button */
         transition: 0.3s ease;
     }
 
     .footer-menu {
-        flex-direction: column;
+        
+        flex-direction: row;
         gap: 10px;
         margin-left: 0;
         align-items: flex-start;
+        position: absolute; /* Absolute positioning for footer-menu */
+        right: 20px; /* Align to the right */
+        bottom: 5px; /* Align to the bottom */
     }
 
     .footer-item {
@@ -90,4 +175,5 @@
         transition: 0.3s ease;
     }
 }
+
 

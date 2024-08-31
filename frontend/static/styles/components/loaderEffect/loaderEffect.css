@@ -25,3 +25,14 @@
       transform: rotate(360deg);
     }
   }
+
+
+  @media (max-width: 768px) {
+
+    .loader-effect {
+      top: 70%; /* Center vertically */
+      left: 45%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Offset to truly center */
+    }
+
+  }

@@ -580,8 +580,8 @@ document.addEventListener('DOMContentLoaded', function() {
         trackList.innerHTML = '';
 
         try {
-            searchForm.classList.add('active');
-            searchInput.style.display = 'block';
+            // searchForm.classList.add('active'); //! SEARCH FORM STUFF
+            // searchInput.style.display = 'block';
             searchInput.value = searchRequest;
             
 
