@@ -7,16 +7,23 @@ OMDB_API_KEY = os.getenv('OMDB_API_KEY')
 
 def get_movie_details(title):
     
-    # params = {
-    #     'apikey' : OMDB_API_KEY,
-    #     't' : title
-    # }
+    params = {
+        'apikey' : OMDB_API_KEY,
+        't' : title
+    }
     
-    url = f"{OMDB_BASE_URL}?apikey={OMDB_API_KEY}&t={title}"
     
-    response = requests.get(url)
+    response = requests.get(OMDB_BASE_URL, params=params)
+    print(response)
+    
+    # response = requests.get(url)
     
     if response.status_code == 200:
-        return response.json()
+        data = response.json()
+        if "Error" in data: 
+            print(f"Error: {data['Error']}") 
+            return None 
+        return data 
+    
     else:
         return None

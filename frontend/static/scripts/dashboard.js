@@ -160,48 +160,73 @@ function createTrackItem(track, index, isInPlaylist = false) {
 
 
 
-//! FUNCTION TO FETCH MOVIE DETAILS
-async function fetchMovieDetails(searchRequest) {
-    
-    const response = await fetch(`/omdb/movie_details?title=${encodeURIComponent(searchRequest)}`);
-    
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-}
+
 
 
 //! FUNCTION TO RENDER SEARCHED MOVIE POSTER
 function renderMoviePoster(movieDetails) {
-    let posterUrl;
     const posterContainer = document.getElementById('movie-image-container');
-
-    if(movieDetails.Poster !== 'N/A') {
-        
-        posterUrl = movieDetails.Poster
-    } else {
-        
-        posterUrl = '../static/images/note-beam.png';
-    }
     
+    // Log the movieDetails object to debug the structure
+    console.log('Movie Details:', movieDetails);
 
+    // Check if movieDetails is defined and has a Poster property
+    let posterUrl = '../static/images/note-beam.png'; // Default image
 
+    if (movieDetails && movieDetails.Poster && movieDetails.Poster !== 'N/A') {
+        posterUrl = movieDetails.Poster;
+    }
 
     posterContainer.innerHTML = `
         <img src="${posterUrl}" style="width: 100%; height: 100%;">
     `;
 }
 
+
+
+//! FUNCTION TO FETCH MOVIE DETAILS
+async function fetchMovieDetails(searchRequest) {
+    try {
+
+        const response = await fetch(`/omdb/movie_details?title=${encodeURIComponent(searchRequest)}`);
+    
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data; // Return the JSON data, including any potential error fields
+
+    } catch (error) {
+        handleMovieErrorSearching();
+
+    }
+    
+    
+}
+
+
+
 //! FUNCTION TO FETCH RELATED PLAYLISTS TO SEARCHED MOVIE ON SPOTIFY
 async function fetchRelatedPlaylists(movieTitle) {
+
+    try {
+
+        const response = await fetch(`/spotify/search_related_playlists?movie_title=${encodeURIComponent(movieTitle)}`);
     
-    const response = await fetch(`/spotify/search_related_playlists?movie_title=${encodeURIComponent(movieTitle)}`);
-    
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data; // Return the JSON data, including any potential error fields
+
+    } catch (error) {
+        handleMusicErrorSearching();
     }
-    return response.json();
+    
+    
+    
 }
 
 async function fetchSong(songTitle) {
@@ -258,18 +283,25 @@ const renderedTrackIDs = new Set();
 //! FUNCTION TO RENDER TRACKS
 function renderTracks(tracks) {
     const trackList = document.getElementById('track-list');
+    
+    if (!Array.isArray(tracks)) {
+        console.error('Tracks data is not an array:', tracks);
+        return;
+    }
+
     trackList.innerHTML = ''; // Clear any existing content
 
     // Render each track in the track list
     tracks.forEach((track, index) => {
-        if(renderedTrackIDs.has(track.id)) {
-            
-            return;
+        if (renderedTrackIDs.has(track.id)) {
+            handleMusicErrorSearching();
         }
         renderedTrackIDs.add(track.id);
 
         const trackItem = createTrackItem(track, index);
-        trackList.appendChild(trackItem);
+        if (trackItem) {
+            trackList.appendChild(trackItem);
+        }
     });
 }
 
@@ -407,7 +439,7 @@ function createPlaylist() {
             createButton.textContent = 'Playlist Added!';
             createButton.disabled = true; // Optionally disable the button after success
             createButton.classList.add('active');
-            console.log(createButton.classList)
+            
 
 
             setTimeout(function() {
@@ -582,10 +614,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-function errorSearching() {
-    searchInput.textContent = 'Error finding this movie. Please try again'
+function handleMovieErrorSearching() {
+    const movieTooltip = document.getElementById('movie-tooltip');
+    const searchInput = document.getElementById('search-input');
 
-    
+
+    // Clear the input field
+    searchInput.value = ''; 
+
+    // Show the tooltip
+    movieTooltip.style.display = 'block';
+
+    // Optionally, you can hide the tooltip after a few seconds
+    setTimeout(() => {
+        movieTooltip.style.display = 'none';
+    }, 5000); // Tooltip will be visible for 5 seconds
+
+}
+
+function handleMusicErrorSearching() {
+    const movieMusicTooltip = document.getElementById('movie-music-tooltip');
+    const searchInput = document.getElementById('search-input')
+
+    searchInput.value = ''; 
+
+    movieMusicTooltip.style.display = 'block';
+
+    setTimeout(() => {
+        movieTooltip.style.display = 'none';
+    }, 5000); // Tooltip will be visible for 5 seconds
+
 }
 
 
@@ -634,19 +692,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 fetchRelatedPlaylists(searchRequest) 
             ]);
 
-            // Handle movie details
-            if (movieDetails.error) {
-                errorSearching();
-                alert(`Error: ${movieDetails.error}`); 
-                return;
-            }
-            renderMoviePoster(movieDetails); 
+            
 
-            // Handle related playlists
-            if (playlistData.error) {
-                alert(`Error: ${playlistData.error}`);
-                return;
-            }
+            
+            renderMoviePoster(movieDetails); 
             
            
             const extractedPlaylistIDs = extractPlaylistID(playlistData);
@@ -666,10 +715,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 console.log('No playlist IDs found');
             }
-        } catch (error) {
-            console.error('Error:', error.message);
-            alert(`Error: ${error.message}`);
-        } finally {
+        }  finally {
             loaderEffect.style.display = "none";
         }
     }

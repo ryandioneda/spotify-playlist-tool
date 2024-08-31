@@ -5,6 +5,7 @@
 @import url(./components/footer/footer.css);
 @import url(./components/trackItem/trackItem.css);
 @import url(./components/loaderEffect/loaderEffect.css);
+@import url(./components/tooltip/tooltip.css);
 
 
 :root{
