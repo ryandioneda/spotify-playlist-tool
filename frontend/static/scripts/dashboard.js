@@ -27,9 +27,24 @@ function updateForMobileView() {
 }
 
 
+const renderedTrackIDs = new Set();
+let trackCount = 1;
 
 //function to create track item
-function createTrackItem(track, index, isInPlaylist = false) {
+function createTrackItem(track, isInPlaylist = false) {
+
+    if(renderedTrackIDs.has(track.id)){
+        return null;
+    }
+
+
+    console.log(track.id)
+    if(renderedTrackIDs.has(track.id)){
+        return null;
+    }
+
+    renderedTrackIDs.add(track.id);
+
     const trackItem = document.createElement('div');
     trackItem.classList.add('track-item');
     trackItem.dataset.id = track.id; // Set the track ID for retrieval
@@ -40,7 +55,7 @@ function createTrackItem(track, index, isInPlaylist = false) {
 
     trackItem.innerHTML = `
     <div class="track-number-container">
-        <div class="track-number">${index + 1}</div>
+        <div class="track-number">${trackCount++}</div>
         <div class="loader">
             <div class="loading">
                 <div class="load"></div>
@@ -275,33 +290,30 @@ async function fetchTrackDetails(trackIDs) {
 }
 
 
-const renderedTrackIDs = new Set();
+
 
 //! FUNCTION TO RENDER TRACKS
 function renderTracks(tracks) {
     const trackList = document.getElementById('track-list');
     
     if (!Array.isArray(tracks)) {
-        console.error('Tracks data is not an array:', tracks);
         return;
     }
 
     trackList.innerHTML = ''; // Clear any existing content
 
     // Render each track in the track list
-    tracks.forEach((track, index) => {
+    tracks.forEach((track) => {
         if (!track || !track.id) { // Check if track or track.id is null or undefined
             console.error('Invalid track:', track);
             return;
         }
-        if (renderedTrackIDs.has(track.id)) {
-            return;
-        }
+        
 
 
-        const trackItem = createTrackItem(track, index);
+        const trackItem = createTrackItem(track);
         if (trackItem) {
-            renderedTrackIDs.add(track.id);
+            
             trackList.appendChild(trackItem);
         }
     });
@@ -312,10 +324,10 @@ function addTrackToPlaylist(track) {
     
     const playlist = document.getElementById('your-track-list');
     const trackIndex = playlist.children.length;
-    const trackItem = createTrackItem(track, trackIndex, true);
+    const trackItem = createTrackItem(track, true);
     playlist.appendChild(trackItem);
     trackItem.classList.remove('hidden'); // Ensure the track item is visible
-    updateTrackCount(); // Update track count
+    
 }
 
 
@@ -328,7 +340,7 @@ function removeTrackFromPlaylist(track) {
         const trackName = item.querySelector('.track-info h1').textContent;
         if (trackName === track.name) {
             item.remove(); // Remove track from playlist
-            updateTrackCount(); // Update track count
+            
 
             // Update track numbers for remaining tracks
             const remainingTracks = playlist.querySelectorAll('.track-item');
@@ -356,20 +368,7 @@ function removeTrackFromPlaylist(track) {
 }
 
 
-//! FUNCTION TO UPDATE TRACK COUNT
-function updateTrackCount() {
-    const playlistSection = document.getElementById('your-track-list');
-    const trackItems = playlistSection.querySelectorAll('.track-item');
-    const trackCount = trackItems.length;
-    const trackCountElement = document.getElementById('track-count');
-    trackCountElement.textContent = trackCount;
 
-    // Update track numbers
-    trackItems.forEach((item, index) => {
-        const trackNumber = item.querySelector('.track-number');
-        trackNumber.textContent = index + 1;
-    });
-}
 
 //! FUNCTION TO RETRIEVE TRACKS FROM YOUR TRACK LIST
 function retrieveTrackList() {
@@ -676,6 +675,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
         renderedTrackIDs.clear();
+        trackCount = 1;
         const trackList = document.getElementById('track-list')
         trackList.innerHTML = '';
 
