@@ -181,6 +181,9 @@ function createTrackItem(track, isInPlaylist = false) {
 //! FUNCTION TO RENDER SEARCHED MOVIE POSTER
 function renderMoviePoster(movieDetails) {
     const posterContainer = document.getElementById('movie-image-container');
+    
+    // Log the movieDetails object to debug the structure
+    console.log('Movie Details:', movieDetails);
 
     // Check if movieDetails is defined and has a Poster property
     let posterUrl = '../static/images/note-beam.png'; // Default image
@@ -303,17 +306,20 @@ function renderTracks(tracks) {
     trackList.innerHTML = ''; // Clear any existing content
 
     // Render each track in the track list
-    tracks.forEach((track) => {
+    tracks.forEach((track, index) => {
         if (!track || !track.id) { // Check if track or track.id is null or undefined
             console.error('Invalid track:', track);
             return;
         }
-        
+        if (renderedTrackIDs.has(track.id)) {
+            return;
+        }
+
 
 
         const trackItem = createTrackItem(track);
         if (trackItem) {
-            
+            renderedTrackIDs.add(track.id);
             trackList.appendChild(trackItem);
         }
     });
@@ -642,7 +648,7 @@ function handleMusicErrorSearching() {
     movieMusicTooltip.style.display = 'block';
 
     setTimeout(() => {
-        movieMusicTooltip.style.display = 'none';
+        movieTooltip.style.display = 'none';
     }, 5000); // Tooltip will be visible for 5 seconds
 
 }
