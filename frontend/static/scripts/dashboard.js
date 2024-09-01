@@ -234,13 +234,29 @@ async function fetchRelatedPlaylists(movieTitle) {
     
 }
 
-async function fetchSong(songTitle) {
-    const response = await fetch(`/spotify/search_track?song_title=${encodeURIComponent(songTitle)}`);
-    if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+async function fetchSearchRequest(searchRequest) {
+    try {
+        const response = await fetch(`/spotify/search_request?searchRequest=${encodeURIComponent(searchRequest)}`);
+        console.log(response);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.track_ids && data.track_ids.length > 0) {
+            const trackDetails = await fetchTrackDetails(data.track_ids);
+            return trackDetails;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        console.error('Error during search request:', error);
+        throw new Error('Failed to fetch tracks.');
     }
-    return response.json();
 }
+
 
 //! FUNCTION TO EXTRACT PLAYLIST IDs
 function extractPlaylistID(playlists) {
@@ -603,26 +619,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const searchButton = document.querySelector('.search__button');
+    const loaderEffect = document.getElementById('loader-effect');
+    const trackList = document.getElementById('track-list')
+    
     searchButton.addEventListener('click', async () => {
         const searchRequest = document.querySelector('.search__input').value;
-        try { //!CHANGED SEARCH SONG ROUTE NAME TO SEARCH TRACK
-            //! CHANGE THIS TO ITS HELPER FUNCTION
-            const response = await fetch(`/spotify/search_request?searchRequest=${encodeURIComponent(searchRequest)}`);
-            console.log(response)
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            console.log(data)
-            if (data.track_ids && data.track_ids.length > 0) {
-                const trackDetails = await fetchTrackDetails(data.track_ids);
-                renderTracks(trackDetails);
+        try {
+            trackList.innerHTML = '';
+            loaderEffect.style.display = 'block';
+            const tracks = await fetchSearchRequest(searchRequest);
+            renderedTrackIDs.clear() 
+            trackCount = 1;
+
+            if (tracks && tracks.length > 0) {
+                // Assuming you have a function to display the tracks
+                renderTracks(tracks);
             } else {
-                displayError('No tracks found.');
+                handleMusicErrorSearching();
             }
         } catch (error) {
-            console.error('Error fetching songs:', error);
-            displayError('Failed to fetch songs. Please try again.');
+            handleMusicErrorSearching();
+    
+        } finally {
+            loaderEffect.style.display = "none";
+
         }
     });
 });
