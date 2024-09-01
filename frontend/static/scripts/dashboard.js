@@ -31,19 +31,9 @@ const renderedTrackIDs = new Set();
 let trackCount = 1;
 
 //function to create track item
-function createTrackItem(track, isInPlaylist = false) {
+function createTrackItem(track, trackCount, isInPlaylist = false) {
 
-    if(renderedTrackIDs.has(track.id)){
-        return null;
-    }
-
-
-    console.log(track.id)
-    if(renderedTrackIDs.has(track.id)){
-        return null;
-    }
-
-    renderedTrackIDs.add(track.id);
+    
 
     const trackItem = document.createElement('div');
     trackItem.classList.add('track-item');
@@ -55,7 +45,7 @@ function createTrackItem(track, isInPlaylist = false) {
 
     trackItem.innerHTML = `
     <div class="track-number-container">
-        <div class="track-number">${trackCount++}</div>
+        <div class="track-number">${trackCount}</div>
         <div class="loader">
             <div class="loading">
                 <div class="load"></div>
@@ -306,7 +296,7 @@ function renderTracks(tracks) {
     trackList.innerHTML = ''; // Clear any existing content
 
     // Render each track in the track list
-    tracks.forEach((track, index) => {
+    tracks.forEach((track) => {
         if (!track || !track.id) { // Check if track or track.id is null or undefined
             console.error('Invalid track:', track);
             return;
@@ -317,22 +307,38 @@ function renderTracks(tracks) {
 
 
 
-        const trackItem = createTrackItem(track);
+        const trackItem = createTrackItem(track, trackCount);
         if (trackItem) {
             renderedTrackIDs.add(track.id);
             trackList.appendChild(trackItem);
+            trackCount++;
         }
     });
 }
 
+
+let myTrackCount = 1;
 //! FUNCTION TO ADD TRACKS TO YOUR TRACK LIST
 function addTrackToPlaylist(track) {
     
+    //? NEED SOMETHING THAT CHECKS WHEN IT IS EMPTY TO RESET myTrackCount
+
+
+
     const playlist = document.getElementById('your-track-list');
-    const trackIndex = playlist.children.length;
-    const trackItem = createTrackItem(track, true);
-    playlist.appendChild(trackItem);
-    trackItem.classList.remove('hidden'); // Ensure the track item is visible
+
+
+    if(playlist.children.length === 0) {
+        myTrackCount = 1; //Reset back to 1 if empty
+    }
+
+    const trackItem = createTrackItem(track, myTrackCount, true);
+
+    if (playlist.appendChild(trackItem)) {
+        myTrackCount++;
+
+    }
+    
     
 }
 
@@ -529,6 +535,9 @@ async function fetchSimilarMusic(trackIDs) {
 
 
 async function refreshMusic() {
+
+    
+
     const currentTrackIDs = retrieveTrackList();
     
 
