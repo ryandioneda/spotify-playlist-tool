@@ -536,9 +536,10 @@ async function fetchSimilarMusic(trackIDs) {
 
 async function refreshMusic() {
 
-    
+
 
     const currentTrackIDs = retrieveTrackList();
+   
     
 
     if(currentTrackIDs.length === 0){
@@ -552,6 +553,7 @@ async function refreshMusic() {
     const similarTracks = recommendations.tracks || []; // Ensure `similarTracks` accesses `tracks` key
 
     if(similarTracks.length > 0){
+        trackCount = 1;
         renderTracks(similarTracks);
 
     } else {
@@ -602,14 +604,16 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const searchButton = document.querySelector('.search__button');
     searchButton.addEventListener('click', async () => {
-        const songTitle = document.querySelector('.search__input').value;
+        const searchRequest = document.querySelector('.search__input').value;
         try { //!CHANGED SEARCH SONG ROUTE NAME TO SEARCH TRACK
             //! CHANGE THIS TO ITS HELPER FUNCTION
-            const response = await fetch(`/spotify/search_track?song_title=${encodeURIComponent(songTitle)}`);
+            const response = await fetch(`/spotify/search_request?searchRequest=${encodeURIComponent(searchRequest)}`);
+            console.log(response)
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
+            console.log(data)
             if (data.track_ids && data.track_ids.length > 0) {
                 const trackDetails = await fetchTrackDetails(data.track_ids);
                 renderTracks(trackDetails);
