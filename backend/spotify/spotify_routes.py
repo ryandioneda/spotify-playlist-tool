@@ -137,20 +137,23 @@ def get_playlist_songs():
         
          
         
-@spotify_bp.route('/search_track', methods=['GET'])
+@spotify_bp.route('/search_request', methods=['GET'])
 def search_song():
     
-    song_title = request.args.get('song_title')
+    search_request = request.args.get('searchRequest')
+    print("Search request:", search_request)
     
     try:
-        songs = fetch_track_search_results(song_title)
+        tracks = fetch_track_search_results(search_request)
+        print("Tracks:", tracks)
         
-        track_ids = extract_track_ids_from_search(songs)
+        track_ids = extract_track_ids_from_search(tracks)
+        print("Track IDs:", track_ids)
         
         return jsonify({'track_ids': track_ids}), 200
     
     except requests.exceptions.HTTPError as e:
-        
+        print("Error")
         return jsonify({'error': 'Failed to fetch data from Spotify API'}), 500
     except Exception as e:
         

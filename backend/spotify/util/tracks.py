@@ -24,15 +24,15 @@ def fetch_track_details(ids_chunk, access_token):
     except Exception as err:
         return {"error": f"An error occurred: {err}"}
     
-"""Fetches search results for a song title from Spotify API"""    
-def fetch_track_search_results(song_title):
+"""Fetches search results for a song request from Spotify API"""    
+def fetch_track_search_results(search_request):
     
     search_url = 'https://api.spotify.com/v1/search'
     search_headers = {
         'Authorization': f'Bearer {session["access_token"]}',
     }
     search_params = {
-        'q': song_title,
+        'q': search_request,
         'type': 'track',
         'limit': 25,
     }
@@ -41,8 +41,8 @@ def fetch_track_search_results(song_title):
     return search_response.json()
 
 """Extract track IDs from search results"""
-def extract_track_ids_from_search(songs):
-    return [track['id'] for track in songs.get('tracks', {}).get('items', [])]
+def extract_track_ids_from_search(tracks):
+    return [track['id'] for track in tracks.get('tracks', {}).get('items', [])]
 
 
 
