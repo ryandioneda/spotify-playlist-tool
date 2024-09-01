@@ -570,6 +570,7 @@ async function refreshMusic() {
 
     if(similarTracks.length > 0){
         trackCount = 1;
+        
         renderTracks(similarTracks);
 
     } else {
