@@ -6,6 +6,18 @@ from flask import session
 from datetime import datetime
 
 def get_auth_url(CLIENT_ID, REDIRECT_URI, AUTH_URL):
+    """
+    Constructs the authorization URL for Spotify's OAuth 2.0 authorization flow
+    
+    Args:
+        - 'CLIENT_ID' (str): The client ID of the Spotify application
+        - 'REDIRECT_URI' (str): The URI to which Spotify will redirect after authorization
+        - 'AUTH_URL' (str): The base URL for Spotify's authorization endpoint
+        
+    Returns:
+        str: The complete authorization URL
+    
+    """
     scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private'
     
     params = {

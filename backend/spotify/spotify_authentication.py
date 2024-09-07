@@ -14,13 +14,33 @@ CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 
 
 def retrieve_auth_url():
+    """
+    Generates and returns the Spotify authorization URL using the CLIENT ID, REDIRECT URI, and authorization base URL. This URL allows the 
+    user to log in and authorize access to their Spotify account
     
+    Returns:
+        'auth_url' (str): The constructed Spotify authorization URL
+    
+    
+    """
     auth_url = get_auth_url(CLIENT_ID, REDIRECT_URI, AUTH_URL)
     return auth_url
 
 
 def exchange_code_for_token_info(code):
-    #Exchange authorization code for access token
+    """
+    Exchanges an authorization code for an access token
+    
+    Args:
+        - 'code' (str): The authorization code provided by Spotify after successful user authentication
+        
+    Returns:
+        - dict: A dictionary containing the token information, which includes the access token, refresh token, expiration time, 
+        and other relevant details. If request fails, it will contain error information
+    
+    """
+    
+    #exchange authorization code for access token
     req_body = {
         'code': code, 
         'grant_type': 'authorization_code', 

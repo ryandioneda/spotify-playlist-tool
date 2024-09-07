@@ -4,13 +4,21 @@ main_bp = Blueprint("main_bp", __name__, template_folder="../../frontend/public/
 
 @main_bp.route('/')
 def index():
+    """
+    Renders the main landing page
+    
+    """
     return render_template('index.html')
 
 
 
 @main_bp.route('/dashboard')
 def dashboard():
+    """
+    Renders dashboard page with profile image if access token in session, renders index if none
     
+    
+    """
     if 'access_token' in session:
         access_token = session['access_token']
         display_name = session.get('display_name', 'User')

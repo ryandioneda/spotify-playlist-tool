@@ -1,7 +1,19 @@
 import requests
 from flask import session
 
-def get_spotify_user_info(access_token): 
+def get_spotify_user_info(access_token):
+    """
+    Retrieves Spotify user information using the provided access token
+    
+    Args:
+        - 'access_token' (str): The access token obtained from Spotify's authorization process
+        
+    Returns:
+        - dict: A dictionary containing user information retrieved from Spotify (user id, display name, 
+        and profile image)
+    
+    """
+    
     url = 'https://api.spotify.com/v1/me'
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -13,6 +25,18 @@ def get_spotify_user_info(access_token):
 
 
 def save_user_info_to_session(user_info):
+    """
+    Saves Spotify user information to the Flask session
+    
+    Args:
+        - 'user_info' (dict): A dictionary containing user information
+        
+    Stores in session:
+        - 'user_id': The Spotify user ID
+        - 'display_name': The user's display name, defaults to 'Unknown User'
+        - 'profile image': The URL of the user's profile image, defaults to ''
+    
+    """
     
     session['user_id'] = user_info['id']
     session['display_name'] = user_info.get('display_name', 'Unknown User')

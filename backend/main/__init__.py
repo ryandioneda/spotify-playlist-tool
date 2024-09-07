@@ -6,7 +6,12 @@ from .main_routes import main_bp
 from ..spotify.spotify_routes import spotify_bp
 from ..omdb.omdb_routes import omdb_bp
 
+
 def create_app():
+    """
+    Creates flask application
+    
+    """
     
     load_dotenv()
     
