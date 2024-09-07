@@ -10,6 +10,14 @@ def index():
     """
     return render_template('index.html')
 
+@main_bp.route('/about')
+def about():
+    """
+    Renders the about page
+    
+    """
+    return render_template('about.html')
+
 
 
 @main_bp.route('/dashboard')
