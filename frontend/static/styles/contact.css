@@ -1,0 +1,88 @@
+/* Import component styles */
+@import url(./components/header/header.css);
+
+/* Import base styles */
+@import url(./global/base.css);
+
+
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 20px; 
+    box-sizing: border-box;
+    
+}
+
+.contact-text {
+    
+    padding-bottom: 17em;
+    color: white;
+    flex: 1; /* Allow text to take up space */
+    margin-right: 20px; /* Space between text and form */
+}
+
+.contact-heading {
+    font-size: 2em;
+    font-family: "sofia-pro", sans-serif;
+
+}
+
+.contact-subtext {
+    font-size: 1em;
+    font-family: "sofia-pro", sans-serif;
+
+}
+
+.contact-form {
+    flex: 1;
+    
+}
+
+/* Form styling */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    margin-bottom: 15px; /* Space between fields */
+}
+
+.input-field input, .input-field textarea {
+    font-family: "sofia-pro", sans-serif;
+    font-size: 1em;
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    height: 100px; /* Fixed height for textarea */
+}
+
+.send-button {
+    text-align: center; /* Center button */
+}
+
+.send-button .send {
+    width: 100%;
+    padding: .75em 1em;
+    background-color: #101010;
+    color: white;
+    font-size: 1.25em;
+    font-weight: 600;
+    font-family: "sofia-pro", sans-serif;
+    border: none;
+}
+
+.send-button .send:hover {
+    background: linear-gradient(90deg, #8529ce -4%, #54248c 32%, #54287d 68.41%, #462966 114.08%);
+    box-shadow: 8px 8px 10px #462966;
+    transition: 0.3s ease;
+}
