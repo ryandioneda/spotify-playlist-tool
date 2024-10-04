@@ -20,19 +20,23 @@
     
     padding-bottom: 17em;
     color: white;
-    flex: 1; /* Allow text to take up space */
-    margin-right: 20px; /* Space between text and form */
+    flex: 1; 
+    margin-right: 20px; 
 }
 
 .contact-heading {
     font-size: 2em;
-    font-family: "sofia-pro", sans-serif;
+    font-family: "Orbitron", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;  
+    line-height: 1.4;
 
 }
 
 .contact-subtext {
     font-size: 1em;
-    font-family: "sofia-pro", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    color: gray;
 
 }
 
@@ -41,18 +45,18 @@
     
 }
 
-/* Form styling */
+
 .form {
     display: flex;
     flex-direction: column;
 }
 
 .input-field {
-    margin-bottom: 15px; /* Space between fields */
+    margin-bottom: 15px; 
 }
 
 .input-field input, .input-field textarea {
-    font-family: "sofia-pro", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1em;
     width: 100%; 
     padding: 10px;
@@ -62,12 +66,12 @@
 }
 
 textarea {
-    resize: vertical; /* Allow vertical resizing only */
-    height: 100px; /* Fixed height for textarea */
+    resize: vertical; 
+    height: 100px; 
 }
 
 .send-button {
-    text-align: center; /* Center button */
+    text-align: center; 
 }
 
 .send-button .send {
