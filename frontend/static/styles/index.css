@@ -16,10 +16,13 @@
 .welcome-text{
     margin-bottom: 32px;
     font-family: "Orbitron", sans-serif;
+
     color: white;
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 500;
-    
+    text-transform: uppercase;
+    letter-spacing: 1px;  
+    line-height: 1.4; 
 }
 
 .more-welcome-text{
