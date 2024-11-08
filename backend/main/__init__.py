@@ -19,7 +19,7 @@ def create_app():
               static_folder="../../frontend/static",
               template_folder="../../frontend/public/templates")
     
-    app.secret_key = os.getenv('CLIENT_SECRET')
+    app.secret_key = os.getenv('SECRET_KEY')
     
     app.register_blueprint(main_bp)
     app.register_blueprint(spotify_bp, url_prefix='/spotify')
