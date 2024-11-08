@@ -3,9 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login | MovieFy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/53a9f4e8dd.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../static/styles/index.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon1-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon1-16x16.png">
+    <link rel="manifest" href="../../static/favicons/site.webmanifest">
 </head>
+
+
+
+
 <body>
+    <header>
+        <div class="header-container">
+            <nav class="navbar">
+                <a href="/" id="moviefy-logo" class="nav-logo"> MOVIEFY</a>
+
+                <ul class="nav-menu">
+                    
+                    <li class="nav-item">
+                        <a href="/dashboard" class="nav-link">Dashboard</a>
+                    </li>
+                    <li id="spotify-logo" class="nav-item-spotify">
+                        <a href="https://www.spotify.com/us/signup?flow_id=581657a2-a828-440f-82d5-f62ec3e0c498%3A1715945370&forward_url=https%3A%2F%2Faccounts.spotify.com%2Fen%2Fstatus%3Fflow_ctx%3D581657a2-a828-440f-82d5-f62ec3e0c498%3A1715945370" target="_blank">
+                            <i class="fa-brands fa-spotify"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="welcome-container">
+        <div class="welcome-text">
+            <p> Movie-Inspired Playlists</p>
+        </div>
+
+        <div class="more-welcome-text">
+            <p>
+                Find music based on your favorite movies and create Spotify playlists with ease
+                  
+            </p>
+        </div>
+
+        <div class="login-button">
+            <form action="/spotify/login">
+                <button type="submit" class="spotify-button">Log in with Spotify &rarr; </p></button>
+            </form>
     
+        </div>
+    </div>
+    <script src="../../static/scripts/index.js"></script>
 </body>
 </html>

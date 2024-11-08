@@ -1,0 +1,15 @@
+.tooltip {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 60px; /* Adjust based on your layout */
+    left: 0;
+    right: 0;
+    background-color: #f44336; /* Red background for error */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9em;
+    z-index: 1000; /* Ensure it appears above other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,38 @@
+.loader-effect{
+    display: none;
+    z-index: 5000;
+
+    border: 4px solid rgba(255, 255, 255, .1);
+    border-left-color: transparent;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    animation: spin89345 1s linear infinite;
+
+    position: absolute; /* Position relative to the closest positioned ancestor */
+    top: 50%; /* Center vertically */
+    left: 75%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset to truly center */
+}
+
+
+@keyframes spin89345 {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+  @media (max-width: 768px) {
+
+    .loader-effect {
+      top: 70%; /* Center vertically */
+      left: 45%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Offset to truly center */
+    }
+
+  }

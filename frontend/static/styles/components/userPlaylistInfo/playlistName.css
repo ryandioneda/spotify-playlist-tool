@@ -1,0 +1,42 @@
+.section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 1em 0 1em 0;
+    max-width: 190px;
+    position: relative;
+  }
+  
+  .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input input {
+    color: white;
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    height: 50px;
+    background-color: rgba(13,13,16, .95);
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 4px solid rgba(13,13,16, .95);
+    
+  
+  }
+  
+
+  
+  .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-inputGroup :is(input:focus, input:valid) {
+    border-color: rgb(37, 37, 211);
+  }
+
+
+  
+  @media (max-width: 768px) {
+    .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input {
+      width: 150px;
+    }
+
+    .section-song-functionality > .section-your-playlist > .section-playlist-info > .playlist-info-container > .playlist-name-input input {
+      padding-left: 0.8em;
+      padding-top: 0.4em;
+      padding-bottom: 0.4em;
+      padding-right: 0.4em;
+        
+    }
+}
