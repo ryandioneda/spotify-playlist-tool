@@ -6,7 +6,8 @@ from .util.authentication import get_auth_url
 SPOTIFY_API_URL = 'https://api.spotify.com/v1'
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
-REDIRECT_URI = 'http://localhost:5000/spotify/callback'
+REDIRECT_URI = 'http://moviefy-website-env.eba-m6xae2xi.us-east-1.elasticbeanstalk.com/spotify/callback'
+
 
 CLIENT_ID = os.getenv('CLIENT_ID')
 
