@@ -24,4 +24,4 @@ def dashboard():
         return render_template('dashboard.html', access_token=access_token, display_name=display_name, profile_image=profile_image)
         
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('main_bp.index'))
