@@ -2,12 +2,11 @@
 
 MovieFy is a web application built to streamline the process of finding and creating Spotify playlists inspired by movies. Users can search by movie title and retrieve playlists that others have already associated with the film, removing the need to sift through multiple options or select tracks to match the movie’s atmosphere. This functionality enables users to quickly create or save playlists that reflect the movie’s theme.
 
----
-
 ## Visit The Site
 Feel free to check out the [project here!](http://moviefy-website-env.eba-m6xae2xi.us-east-1.elasticbeanstalk.com/)
+
 ![](frontend/static/images/moviefy_landingpage.png)
----
+
 
 ## Core Features and Functionality
 1. **Spotify Authentication and Authorization:**
@@ -18,8 +17,6 @@ Feel free to check out the [project here!](http://moviefy-website-env.eba-m6xae2
   - Users can retrieve more track options using the refresh feature to fetch additional music selections.
 4. **Playlist Creation:**
   - Users can create a new Spotify playlist that will be added to their Spotify library.
-
----
 
 ## Project Structure
 MovieFy implements several technologies and frameworks:
