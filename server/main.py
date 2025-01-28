@@ -1,21 +1,5 @@
-from flask import Flask, jsonify
-from flask_cors import CORS
+import uvicorn
 
-app = Flask(__name__) #create app instance
-cors = CORS(app, origins='*')
-
-
-@app.route("/api/users", methods=['GET'])
-def users():
-    return jsonify(
-        {
-            "users": [
-                'hello',
-                'flynn',
-                'tron',
-            ]
-        }
-    )
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    uvicorn.run("app.api:app", host="0.0.0.0", port=8000, reload=True)
