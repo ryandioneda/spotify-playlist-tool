@@ -5,9 +5,6 @@ MovieFy is a web application built to streamline the process of finding and crea
 ## Visit The Site
 Feel free to check out the [#!]()
 
-![](frontend/static/images/moviefy_landingpage.png)
-
-
 ## Core Features and Functionality
 1. **Spotify Authentication and Authorization:** MovieFy uses Spotify's OAuth 2.0 for secure authentication, enabling users to log in with their Spotify account.
 2. **Movie-Related Playlist Search:** Users can search for playlists based on a desired movie title. MovieFy sends API requests to Spotify to retrieve relevant music, populating the interface with the fetched tracks.
@@ -21,4 +18,7 @@ MovieFy's primary technologies and frameworks:
 - **API Integration:** MovieFy interacts directly with the SPotify API to perform various operations on Spotify data.
 - **JavaScript & Template Rendering:** The application's frontend utilizes Flask's templating engine, Jinja2, to dynamically render pages while using JavaScript to provide interactivity.
 
+## Project Overview
 
+#### Spotify OAuth Process
+![Spotify OAuth](extras/Moviefy%20Spotify%20OAuth%20Sequence%20Diagram.svg)
