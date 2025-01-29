@@ -2,6 +2,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.routers import login
+
 app = FastAPI()
 
 origins = [
@@ -18,6 +20,4 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get("/", tags=["root"])
-async def read_root() -> dict:
-    return {"message": "Hello, World!"}
+app.include_router(login.router)
