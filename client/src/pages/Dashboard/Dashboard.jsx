@@ -1,9 +1,30 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import getUserProfile from "../../utils/ProfileUtil";
 
 function Dashboard() {
 
-    return <div>Welcome to your dashboard!</div>;
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     fetchSearch();
+    // }
+    
+
+    // return (
+    //     <form action="" className="" onSubmit={handleSubmit}>
+    //         <input type="text" placeholder="Search a movie!" className="" onChange={(e) => setSearchTerm(e.target.value)}>
+
+    //         </input>
+    //     </form>
+    // )
+
+    return (
+        <button onClick={getUserProfile}>
+            Tell me user!
+
+        </button>
+    )
 }
 
 export default Dashboard;

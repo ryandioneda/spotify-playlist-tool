@@ -1,16 +1,23 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function Index() {
-    const API_URL = import.meta.env.VITE_SERVER_URL;
-    const navigate = useNavigate();
 
-    const handleLogin = async () => {
-        window.location.href = `${API_URL}/auth/authorize`
-    };
+    const handleLogin = () => {
+        window.location.href = `${SERVER_URL}/auth/spotify/login`;
+    }
 
+    // useEffect(() => {
+    //     const urlParams = new URLSearchParams(window.location.search);
+    //     const code = urlParams.get("code");
+    //     console.log(code)
+
+    //     if (code) {
+    //         fetchTokens(code);
+    //     }
+    // }, []);
 
     return (
         <button onClick={handleLogin}>
