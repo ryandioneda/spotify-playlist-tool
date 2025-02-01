@@ -1,7 +1,7 @@
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-const getUserProfile = async () => {
+export const fetchUserProfile = async () => {
     const response = await fetch(`${SERVER_URL}/user/profile`, {
         method: "GET",
         credentials: "include",
@@ -13,5 +13,3 @@ const getUserProfile = async () => {
         console.log("Error fetching profile");
     }
 }
-
-export default getUserProfile;

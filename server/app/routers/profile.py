@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 
-from app.crud.crud_profile import get_current_user
+from app.utils.spotify_authentication import get_current_user
 
 import httpx
 
