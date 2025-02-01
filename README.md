@@ -21,4 +21,4 @@ MovieFy's primary technologies and frameworks:
 ## Project Overview
 
 #### Spotify OAuth Process
-![Spotify OAuth](extras/Moviefy%20Spotify%20OAuth%20Sequence%20Diagram.svg)
+![Spotify OAuth](extras/Moviefy%20Spotify%20OAuth%20Sequence%20Diagram.jpeg)
