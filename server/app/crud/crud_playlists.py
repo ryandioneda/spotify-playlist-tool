@@ -3,6 +3,7 @@ from fastapi import Request, HTTPException, Depends
 from app.utils.spotify_authentication import get_current_user
 
 import httpx
+import urllib.parse
 
 async def search_related_playlists(search: str, access_token: str):
     """
@@ -14,7 +15,7 @@ async def search_related_playlists(search: str, access_token: str):
     }
 
     params = {
-        "q": f"{search} soundtrack",
+        "q": urllib.parse.quote(f"{search} soundtrack"),
         "type": "playlist",
         "limit": 10
     }

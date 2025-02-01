@@ -3,7 +3,9 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 
 export const getPlaylistIds = async (playlistsJSONObject) => {
-    const playlistIDs = playlistsJSONObject.playlists.items.map(playlist => playlist.id);
+    const validPlaylists = playlistsJSONObject.playlists.items.filter(playlist => playlist !== null);
+    
+    const playlistIDs = validPlaylists.map(playlist => playlist.id);
     return playlistIDs
 }
 
@@ -28,7 +30,7 @@ export const fetchPlaylistItems = async (playlistIds) => {
 
 export const getPlaylistTrackIds = async (playlistsJSONItemsObject) => {
     const trackIDs = playlistsJSONItemsObject.flatMap(playlist => 
-        playlist.items.map(item => item.track.id)
+        playlist.items?.map(item => item.track?.id).filter(id => id !== undefined) || [] // Filter undefined track IDs
     );
     return trackIDs;
 }

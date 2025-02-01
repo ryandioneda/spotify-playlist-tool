@@ -12,20 +12,25 @@ function Dashboard() {
         e.preventDefault();
         
         try {
+            const encodedSearchTerm = encodeURIComponent(searchTerm)
+            console.log(encodedSearchTerm);
             // fetch api
-            const playlistsJSONResponse = await fetchSearchResults(searchTerm);
+            const playlistsJSONResponse = await fetchSearchResults(encodedSearchTerm);
+            //console.log(`1ST RESPONSE: ${playlistsJSONResponse}`);
+            console.log(playlistsJSONResponse);
 
             //parse
             const playlistIds = await getPlaylistIds(playlistsJSONResponse);
+            console.log(`2ND RESPONSE: ${playlistIds}`);
 
             // fetch api
             const playlistsJSONItems = await fetchPlaylistItems(playlistIds);
 
-            console.log(playlistsJSONItems);
+            console.log(`3RD RESPONSE: ${playlistsJSONItems}`);
 
             // parse
             const playlistTrackIds = await getPlaylistTrackIds(playlistsJSONItems);
-            console.log(playlistTrackIds);
+            console.log(`4TH RESPONSE: ${playlistTrackIds}`);
 
 
         } catch (error) {
