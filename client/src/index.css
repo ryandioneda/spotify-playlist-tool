@@ -1,5 +1,6 @@
 @import "tailwindcss";
-
-/* body {
-  background-color: #242424;
-} */
+@import '@fontsource-variable/inter';
+body {
+  font-family: 'Inter Variable', sans-serif;
+  background-color: hsl(221, 20%, 11%);
+}
