@@ -3,4 +3,5 @@
 body {
   font-family: 'Inter Variable', sans-serif;
   background-color: hsl(221, 20%, 11%);
+  overflow: hidden;
 }
