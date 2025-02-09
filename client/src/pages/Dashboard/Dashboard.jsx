@@ -11,7 +11,19 @@ import Footer from "../../components/Footer/Footer";
 function Dashboard() {
 
     const [searchTerm, setSearchTerm] = useState("");
+    const [userProfile, setUserProfile] = useState(null);
+
+
+    useEffect(() => {
+        const getUserProfile = async () => {
+            const profileData = await fetchUserProfile();
+            setUserProfile(profileData)
+        };
     
+        getUserProfile();
+
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -42,7 +54,6 @@ function Dashboard() {
         }
     }
 
-
     return (
         <div className="h-screen grid grid-rows-6 bg-transparent md:grid-cols-6">
 
@@ -59,8 +70,8 @@ function Dashboard() {
                 </div>
 
                 {/* EXTRA INFO CONTAINER - COL 2 */}
-                <div className="bg-pink-500 row-span-3 flex justify-start items-center p-2">
-                    <div className="bg-green-500 flex flex-col gap-8 items-start">
+                <div className="bg-pink-500 row-span-3 flex justify-start">
+                    <div className="bg-green-500 flex flex-col gap-2 items-start p-2">
                         <div className="bg-purple-500">
                             <input
                                 placeholder="Playlist Name"
@@ -70,8 +81,21 @@ function Dashboard() {
                             </input>
                         </div>
 
-                        <div className="bg-blue-500">
-                            USER INFO
+                        <div className="bg-blue-500 flex w-full gap-2">
+                            <div className="w-8 h-8 md:w-12 md:h-12 overflow-hidden bg-red-500">
+                                <img
+                                    src={userProfile?.profile_image || "default-profile.png"}
+                                    className="w-full h-full object-cover rounded-full"
+                                >
+
+                                </img>
+                            </div>
+
+                            <div className="bg-yellow-500 flex justify-center items-center">
+                                <p>{userProfile?.display_name || "User"}</p>
+
+                            </div>
+                            
                         </div>
 
                     </div>

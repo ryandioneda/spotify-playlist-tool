@@ -6,10 +6,12 @@ export const fetchUserProfile = async () => {
         method: "GET",
         credentials: "include",
     });
-    if (response.ok) {
-        const data = await response.json();
-        console.log("User profile:", data)
-    } else {
-        console.log("Error fetching profile");
+
+    if (!response.ok) {
+        throw new Error("Error fetching profile");
     }
+    
+    const data = await response.json();
+    console.log("User profile:", data);
+    return data; 
 }
