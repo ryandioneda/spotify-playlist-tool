@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { fetchUserProfile } from "../../utils/ProfileUtil"
 import { fetchSearchResults } from "../../utils/SearchUtil";
 import { getPlaylistIds, fetchPlaylistItems, getPlaylistTrackIds} from "../../utils/PlaylistsUtil";
-import { fetchTracks } from "../../utils/TrackUtils";
+import { fetchTracks, createTracks } from "../../utils/TrackUtils";
 
 import musicPNG from "../../assets/images/note-beam-blank.png";
 
@@ -51,6 +51,9 @@ function Dashboard() {
 
             const trackInformation = await fetchTracks(playlistTrackIds)
             console.log(trackInformation);
+            const tracks = createTracks(trackInformation)
+
+            
 
 
         } catch (error) {
