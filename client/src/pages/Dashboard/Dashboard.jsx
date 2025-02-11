@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { fetchUserProfile } from "../../utils/ProfileUtil"
 import { fetchSearchResults } from "../../utils/SearchUtil";
 import { getPlaylistIds, fetchPlaylistItems, getPlaylistTrackIds} from "../../utils/PlaylistsUtil";
+import { fetchTracks } from "../../utils/TrackUtils";
 
 import musicPNG from "../../assets/images/note-beam-blank.png";
 
@@ -47,6 +48,9 @@ function Dashboard() {
             // parse
             const playlistTrackIds = await getPlaylistTrackIds(playlistsJSONItems);
             console.log(`4TH RESPONSE: ${playlistTrackIds}`);
+
+            const trackInformation = await fetchTracks(playlistTrackIds)
+            console.log(trackInformation);
 
 
         } catch (error) {
@@ -121,9 +125,33 @@ function Dashboard() {
 
             </div>
 
-            <div className="bg-blue-400 p-2 md:row-start-6 md:col-span-6">
-                <div className="bg-amber-100">
-                    UTIL CONTAINER
+            <div className="bg-blue-400 pt-2 flex pr-2 pl-2 md:row-start-6 md:col-span-6">
+                <div className="bg-amber-100 flex flex-1">
+                    <div>
+                        <button
+                            className="bg-red-500"     
+                        >
+                            Add Playlist
+                        </button>
+                    </div>
+                </div>
+
+                <div className="bg-purple-500 flex flex-1">
+                    <form 
+                        action=""
+                        className=""
+                        onSubmit={handleSubmit}
+                    >
+                        <input
+                            placeholder="Search a movie"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        >
+                        
+                        </input>
+
+
+                    </form>
                 </div>
             </div>
                    

@@ -17,7 +17,7 @@ async def search_related_playlists(search: str, access_token: str):
     params = {
         "q": urllib.parse.quote(f"{search} soundtrack"),
         "type": "playlist",
-        "limit": 10
+        "limit": 5
     }
 
     async with httpx.AsyncClient() as client:

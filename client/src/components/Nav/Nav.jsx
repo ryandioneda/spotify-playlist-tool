@@ -25,7 +25,7 @@ const Nav = () => {
     const slider = useRef(null);
 
     return (
-        <nav className="grid grid-cols-3 items-center p-4 text-[#fffff0]">
+        <nav className="grid grid-cols-3 items-center mt-1 pl-4 pr-4 pt-6 pb-2 md:pt-4  text-[#fffff0]">
             
             <div className="text-xl h-full md:flex md:flex-row md:justify-start">
                 

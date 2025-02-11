@@ -1,7 +1,8 @@
 
-from fastapi import APIRouter, Depends 
+from fastapi import APIRouter, Depends, Query
 
 from app.crud.crud_playlists import search_related_playlists, get_playlist_items
+from app.crud.crud_tracks import get_several_tracks
 
 from app.utils.spotify_authentication import get_current_user
 
@@ -23,13 +24,12 @@ async def get_playlist_tracks(playlist_id: str, access_token: str = Depends(get_
     """
     Gets a playlist's tracks and returns a JSON Response containing the Track IDs 
     """
-    print("In playlist id route")
     playlist_track_json_results = await get_playlist_items(playlist_id, access_token)
-    print(playlist_track_json_results)
     return playlist_track_json_results
 
-    
+@router.get("/api/v2/tracks")    
+async def get_tracks(ids: str = Query(...), access_token: str = Depends(get_current_user)):
+    return await get_several_tracks(ids, access_token)
 
-    # returns a JSON object of track IDs
 
 
