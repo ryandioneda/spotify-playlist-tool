@@ -41,7 +41,6 @@ export const createTracks = async (data) => {
             uri
         });
 
-        // const playbackJson = fetchPlayback(uri)
     }
     console.log(tracksArray)
     return tracksArray
