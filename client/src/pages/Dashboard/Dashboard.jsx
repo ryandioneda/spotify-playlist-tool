@@ -3,16 +3,18 @@ import { useState, useEffect } from "react";
 import { fetchUserProfile } from "../../utils/ProfileUtil"
 import { fetchSearchResults } from "../../utils/SearchUtil";
 import { getPlaylistIds, fetchPlaylistItems, getPlaylistTrackIds} from "../../utils/PlaylistsUtil";
-import { fetchTracks } from "../../utils/TrackUtils";
+import { fetchTracks, createTracks } from "../../utils/TrackUtils";
 
 import musicPNG from "../../assets/images/note-beam-blank.png";
 
 import Footer from "../../components/Footer/Footer";
+import TrackList from "../../components/TrackList/TrackList";
 
 function Dashboard() {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [userProfile, setUserProfile] = useState(null);
+    const [tracks, setTracks] = useState([]);
 
 
     useEffect(() => {
@@ -27,6 +29,7 @@ function Dashboard() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setTracks([]);
         
         try {
             const encodedSearchTerm = encodeURIComponent(searchTerm)
@@ -52,6 +55,12 @@ function Dashboard() {
             const trackInformation = await fetchTracks(playlistTrackIds)
             console.log(trackInformation);
 
+            const tracks = await createTracks(trackInformation);
+            console.log(tracks[0]);
+            setTracks(tracks);
+
+            
+
 
         } catch (error) {
             console.error("Error fetching search results:", error)
@@ -59,14 +68,14 @@ function Dashboard() {
     }
 
     return (
-        <div className="h-screen grid grid-rows-6 bg-transparent md:grid-cols-6">
+        <div className="h-screen grid grid-rows-6 bg-transparent md:grid-cols-6 pl-2 pr-2 gap-2">
 
             {/* INFO CONTAINER */}
-            <div className="bg-transparent row-span-3 grid grid-cols-2 grid-rows-12 md:col-span-3 md:row-span-5">
+            <div className="row-span-3 grid grid-cols-2 grid-rows-12 md:col-span-3 md:row-span-5 bg-[rgba(106,106,128,0.25)] rounded-sm">
 
                  {/* IMAGE CONTAINER - COL 1*/}
-                <div className="bg-blue-500 row-span-3 p-2 flex justify-center items-center">
-                    <div className="bg-yellow-500 h-full w-full flex">
+                <div className="bg-yellow-500 row-span-3 p-2 flex justify-center items-center">
+                    <div className="h-full w-full flex">
                          <img 
                          className="flex w-full h-full object-contain" 
                          src={musicPNG} />
@@ -74,8 +83,8 @@ function Dashboard() {
                 </div>
 
                 {/* EXTRA INFO CONTAINER - COL 2 */}
-                <div className="bg-pink-500 row-span-3 flex justify-start">
-                    <div className="bg-green-500 flex flex-col gap-2 items-start p-2">
+                <div className="row-span-3 flex justify-start">
+                    <div className="flex flex-col gap-2 items-start p-2">
                         <div className="bg-purple-500">
                             <input
                                 placeholder="Playlist Name"
@@ -85,7 +94,7 @@ function Dashboard() {
                             </input>
                         </div>
 
-                        <div className="bg-blue-500 flex w-full gap-2">
+                        <div className="flex w-full gap-2">
                             <div className="w-8 h-8 md:w-12 md:h-12 overflow-hidden bg-red-500">
                                 <img
                                     src={userProfile?.profile_image || "default-profile.png"}
@@ -106,7 +115,7 @@ function Dashboard() {
                 </div>
 
                 {/* USER PLAYLIST TRACKS */}
-                <div className="row-start-4 row-span-9 col-span-2 bg-green-700 p-2">
+                <div className="row-start-4 row-span-9 col-span-2 p-2">
                     <div className="border-2 border-black bg-purple-500 flex w-full h-full">
                         HELLO
 
@@ -117,9 +126,30 @@ function Dashboard() {
             </div>
 
             {/* SEARCH CONTAINER */}
-            <div className="bg-orange-500 row-span-2 p-2 grid-rows-2 md:col-span-3 md:row-span-5">
-                <div className="border-2 border-black bg-white flex h-full w-full">
-                    HELLO
+            <div className="row-span-2 p-2 grid-rows-2 md:col-span-3 md:row-span-5 bg-[rgba(106,106,128,0.25)] rounded-sm flex flex-col">
+                <div className="w-full">
+
+                    <form 
+                        action=""
+                        className="w-full text-[#fffff0] border-white border-2"
+                        onSubmit={handleSubmit}
+                    >
+                        <input
+                            placeholder="Search a movie"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full text-[#fffff0] placeholder-[#fffff0]"
+                        >
+                        
+                        </input>
+
+
+                    </form>
+
+                </div>
+                <div className="flex h-full w-full overflow-x-hidden overflow-y-auto">
+
+                    {tracks.length > 0 ? <TrackList tracksArray={tracks}/> : <div></div>}
 
                 </div>
 
@@ -137,21 +167,20 @@ function Dashboard() {
                 </div>
 
                 <div className="bg-purple-500 flex flex-1">
-                    <form 
+                    {/* <form 
                         action=""
                         className=""
                         onSubmit={handleSubmit}
                     >
                         <input
-                            placeholder="Search a movie"
+                            placeholder="Search a song"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         >
-                        
                         </input>
 
 
-                    </form>
+                    </form> */}
                 </div>
             </div>
                    
