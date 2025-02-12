@@ -71,7 +71,7 @@ function Dashboard() {
         <div className="h-screen grid grid-rows-6 bg-transparent md:grid-cols-6 pl-2 pr-2 gap-2">
 
             {/* INFO CONTAINER */}
-            <div className="row-span-3 grid grid-cols-2 grid-rows-12 md:col-span-3 md:row-span-5 bg-gray-400 rounded-sm">
+            <div className="row-span-3 grid grid-cols-2 grid-rows-12 md:col-span-3 md:row-span-5 bg-[rgba(106,106,128,0.25)] rounded-sm">
 
                  {/* IMAGE CONTAINER - COL 1*/}
                 <div className="bg-yellow-500 row-span-3 p-2 flex justify-center items-center">
@@ -126,8 +126,29 @@ function Dashboard() {
             </div>
 
             {/* SEARCH CONTAINER */}
-            <div className="row-span-2 p-2 grid-rows-2 md:col-span-3 md:row-span-5 bg-gray-400 rounded-sm">
-                <div className="border-2 border-black flex h-full w-full overflow-x-hidden overflow-y-auto">
+            <div className="row-span-2 p-2 grid-rows-2 md:col-span-3 md:row-span-5 bg-[rgba(106,106,128,0.25)] rounded-sm flex flex-col">
+                <div className="w-full">
+
+                    <form 
+                        action=""
+                        className="w-full text-[#fffff0] border-white border-2"
+                        onSubmit={handleSubmit}
+                    >
+                        <input
+                            placeholder="Search a movie"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full text-[#fffff0] placeholder-[#fffff0]"
+                        >
+                        
+                        </input>
+
+
+                    </form>
+
+                </div>
+                <div className="flex h-full w-full overflow-x-hidden overflow-y-auto">
+
                     {tracks.length > 0 ? <TrackList tracksArray={tracks}/> : <div></div>}
 
                 </div>
@@ -146,21 +167,20 @@ function Dashboard() {
                 </div>
 
                 <div className="bg-purple-500 flex flex-1">
-                    <form 
+                    {/* <form 
                         action=""
                         className=""
                         onSubmit={handleSubmit}
                     >
                         <input
-                            placeholder="Search a movie"
+                            placeholder="Search a song"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         >
-                        
                         </input>
 
 
-                    </form>
+                    </form> */}
                 </div>
             </div>
                    
