@@ -9,12 +9,14 @@ import musicPNG from "../../assets/images/note-beam-blank.png";
 
 import Footer from "../../components/Footer/Footer";
 import TrackList from "../../components/TrackList/TrackList";
+import UserTrackList from "../../components/UserTrackList/UserTrackList";
 
 function Dashboard() {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [userProfile, setUserProfile] = useState(null);
     const [tracks, setTracks] = useState([]);
+    const [userTracks, setUserTracks] = useState([]);
 
 
     useEffect(() => {
@@ -26,6 +28,17 @@ function Dashboard() {
         getUserProfile();
 
     }, []);
+
+    //! ADDED
+    const handleAddTrack = (track) => {
+        console.log("Clicked Plus!")
+        setUserTracks(prevTracks => [...prevTracks, track])
+        // if (!userTracks.find(t => t.trackId === track.trackId)) { // Prevent duplicates
+        //         setUserTracks([...userTracks, track]);
+        // } else {
+        //     console.log("duplicate")
+        // }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -116,8 +129,8 @@ function Dashboard() {
 
                 {/* USER PLAYLIST TRACKS */}
                 <div className="row-start-4 row-span-9 col-span-2 p-2">
-                    <div className="border-2 border-black bg-purple-500 flex w-full h-full">
-                        HELLO
+                    <div className="border-2 border-black bg-purple-500 flex w-full h-full overflow-x-hidden overflow-y-auto">
+                        <UserTrackList userTracks={userTracks}/>
 
                     </div>
 
@@ -149,7 +162,7 @@ function Dashboard() {
                 </div>
                 <div className="flex h-full w-full overflow-x-hidden overflow-y-auto">
 
-                    {tracks.length > 0 ? <TrackList tracksArray={tracks}/> : <div></div>}
+                    {tracks.length > 0 ? <TrackList tracksArray={tracks} onAddTrack={handleAddTrack}/> : <div></div>}
 
                 </div>
 
