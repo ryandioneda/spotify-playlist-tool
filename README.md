@@ -23,3 +23,8 @@ MovieFy's primary technologies and frameworks:
 
 #### Searching Sequence
 ![Searching Process](extras/Moviefy%20Application%20Sequence%20Diagram.jpeg)
+
+
+## Roadmap
+This spotify search tool is a passion project of mine and it is currently functional; however, it is no longer deployed due to cost related issues. I do have plans in the future to deploy it. Thank you for checking out my Spotify Search Tool! If you have any questions or feedback, feel free to reach out.
+
